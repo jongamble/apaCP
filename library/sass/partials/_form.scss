@@ -1,0 +1,18 @@
+.input-label {
+	margin:15px 0 5px; 
+
+}
+.input-text {
+	width:100%;
+	padding: 5px 10px;
+	@include border-radius(5px);
+
+}
+.input-select {
+	@extend .input-text;
+}
+.input-submit {
+	@extend .input-text;
+	margin-top:15px;
+	@include background-image(linear-gradient(#eaeaea, #dadada, #eaeaea));
+}
