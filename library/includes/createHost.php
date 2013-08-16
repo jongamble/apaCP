@@ -71,6 +71,28 @@ class createHost
 		return $output;
 	}
 
+	public function createVirtualHost()
+	{
+		$input = '# domain: example.com'."\n";
+		$input .= '# public: /home/example_user/public/example.com/'."\n\n";
+
+		$input .= '<VirtualHost *:80>'."\n";
+  		$input .= '# Admin email, Server Name (domain name), and any aliases'."\n";
+  		$input .= 'ServerAdmin webmaster@example.com'."\n";
+  		$input .= 'ServerName  www.example.com'."\n";
+  		$input .= 'ServerAlias example.com'."\n\n";
+
+  		$input .= '# Index file and Document Root (where the public files are located)'."\n";
+  		$input .= 'DirectoryIndex index.html index.php'."\n";
+  		$input .= 'DocumentRoot /home/example_user/public/example.com/public'."\n\n";
+
+  		$input .= '# Log file locations'."\n";
+  		$input .= 'LogLevel warn'."\n";
+  		$input .= 'ErrorLog  /home/example_user/public/example.com/log/error.log'."\n";
+  		$input .= 'CustomLog /home/example_user/public/example.com/log/access.log combined'."\n";
+		$input .= '</VirtualHost>'."\n";
+
+	}
 	
 
 	public function enableSite(){
