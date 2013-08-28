@@ -85,7 +85,7 @@
 					echo '<td class="active-hosts-data-item">'.ucwords($res['folder_name']).'</td>';
 					echo '<td class="active-hosts-data-item">'.ucwords($res['client_type']).'</td>';
 					echo '<td class="active-hosts-data-item">'.ucwords($res['active']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['id']).'</td>';
+					echo '<td class="active-hosts-data-item"><i class=".icon-cog"></i></td>';
 				echo '</tr>';
 				}?>
 
