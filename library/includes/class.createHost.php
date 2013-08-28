@@ -104,5 +104,23 @@ class createHost
 		$output = 'service apache2 restart';
 		return $output;
 	}
+	public function validateInput(){
+		$inputArray = array(
+			$this->_siteName,
+			$this->_domainName,
+			$this->_userName,
+			$this->_userPass,
+			$this->_folderName,
+			$this->_clientType
+		);
+		foreach($inputArray as $val){
+			if(empty($val)){
+				$invalidOutput = 'true';
+			}else{
+				$invalidOutput = 'false';
+			}
+		}
+		return $invalidOutput;
+	}
 }
 ?>

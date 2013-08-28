@@ -1,24 +1,31 @@
 <?php 
-	include_once('library/includes/createHost.php');
-
+	include_once('library/includes/class.database.php');
+	include_once('library/includes/class.createHost.php');
+	$db = new Database();
+	$db->connect();
+	$db->select('virtualHosts');
+	$dbResults = $db->getResult();
 	if(isset($_POST['submit'])){
 		$create = new createHost($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']);
-		$createUserOutput = $create->createUser();
-		$createFolderOutput = $create->createFolder();
-		$enableSiteOut = $create->enableSite();
-		$restartApacheOut = $create->restartApache();
+		if($create->validateInput() == 'false'){
+			$db->insert('virtualHosts', array($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']));
+			$createUserOutput = $create->createUser();
+			$createFolderOutput = $create->createFolder();
+			$enableSiteOut = $create->enableSite();
+			$restartApacheOut = $create->restartApache();
+		}
 	}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apache Admin Panel</title>
-	<link rel="stylesheet" href="library/css/bootstrap.min.css">
 	<link rel="stylesheet" href="library/css/screen.css">
-
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="library/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="library/js/libs.js"></script>
+    <script src="library/js/scripts.js"></script>
 </head>
 <body>
 <header class="main-header">
@@ -27,7 +34,7 @@
 	</div>
 </header>
 <section class="container">
-	<article class="module create-new col-lg-5 col-sm-12">
+	<article class="module create-new col-lg-4 col-sm-12">
 		<header class="module-header">
 			<h1 class="h2">Create a New Virtual Host</h1>
 		</header>
@@ -55,16 +62,46 @@
 			</form>
 		</section>
 	</article>
-	<article class="module view-active col-lg-push-2 col-lg-5 col-sm-12">
+	<article class="module view-active col-lg-push-1 col-lg-7 col-sm-12">
 		<header class="module-header">
 			<h1 class="h2">View Active Virtual Hosts</h1>
+		</header>
+		<section class="module-content">
+			<table class="active-hosts">
+				<tr class="active-hosts-headings">
+					<th class="active-hosts-header">Site Name</th>
+					<th class="active-hosts-header">Domain Name</th>
+					<th class="active-hosts-header">User Name</th>
+					<th class="active-hosts-header">Folder Name</th>
+					<th class="active-hosts-header">Client Type</th>
+					<th class="active-hosts-header">Active?</th>
+					<th class="active-hosts-header">Actions</th>
+				</tr>
+				<?php foreach($dbResults as $res){
+				echo '<tr class="active-hosts-row">';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['site_name']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['domain_name']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['user_name']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['folder_name']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['client_type']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['active']).'</td>';
+					echo '<td class="active-hosts-data-item">'.ucwords($res['id']).'</td>';
+				echo '</tr>';
+				}?>
+
+			</table>
+		</section>
+	</article>
+	<article class="module test-output col-12">
+		<header class="module-header">
+			<h1 class="h2">Test Output</h1>
+		</header>
+		<section class="module-content">
+			<p><?php echo $errorMessage;?></p>
 			<p><?php echo $createUserOutput;?></p>
 			<p><?php echo $createFolderOutput;?></p>
 			<p><?php echo $enableSiteOut;?></p>
 			<p><?php echo $restartApacheOut;?></p>
-		</header>
-		<section class="module-content">
-			<p>This is also a test box to show stuff.</p>
 		</section>
 	</article>
 </section>

@@ -16,3 +16,7 @@
 	margin-top:15px;
 	@include background-image(linear-gradient(#eaeaea, #dadada, #eaeaea));
 }
+
+.form-error {
+	@include box-shadow(rgba(red, .5) 0 0 10px 2px inset)
+}

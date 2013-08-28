@@ -7,10 +7,3 @@ body {background:#efefef;}
 		margin: .5em 0;
 	}
 }
-
-.module {
-	background:white;
-	border: 1px solid rgba(245,245,245,.7);
-	@include box-shadow(2px 2px 5px 3px #ccc);
-	padding: 20px 10px;
-}
