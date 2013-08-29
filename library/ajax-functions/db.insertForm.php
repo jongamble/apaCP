@@ -25,8 +25,8 @@ $result = $db->insert(
 		'true'
 	)
 );
-
-echo json_encode(array('Result'=>$result));
-
-
+$lastRecord = mysql_insert_id();
+$echo = $db->select('virtualHosts', '*' ,'id = '.$lastRecord);
+$dbResults = $db->getResult();
+echo json_encode($dbResults);
 ?>
