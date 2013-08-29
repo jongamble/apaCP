@@ -12,7 +12,7 @@
  * @license All Rights Reserved
  */
 
-class createHost
+class CreateHost
 {
 	// Set up private variables for each host creation
 	private $_siteName;

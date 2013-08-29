@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 			output += '<td class="active-hosts-data-item">' + data['folder_name'] + '</td>';
 			output += '<td class="active-hosts-data-item">' + data['client_type'] + '</td>';
 			output += '<td class="active-hosts-data-item">' + data['active'] + '</td>';
-			output += '<td class="active-hosts-data-item active-hosts-icons"><a href="#' + data["id"] + '" class="edit-' + data["id"] + '"><i class="icon-cog"></i></a><a href="#' + data["id"] + '" class="trash-' + data["id"] + '"><i class="icon-trash"></i></a></td>';
+			output += '<td class="active-hosts-data-item active-hosts-icons"><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="edit-host"><i class="icon-cog"></i></a><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="trash-host"><i class="icon-trash"></i></a></td>';
 			output += '</tr>';
 			return output;
 		}
@@ -72,4 +72,31 @@ jQuery(document).ready(function($) {
 	    return false;
 	});
 // End the Create Host Submit Button Functionality
+
+// Start the Delete Host Trash Button Functionality
+	$('.trash-host').on('click', function(){
+		var itemID = $(this).data("item-id");
+		
+		$.ajax({
+		  url: 'library/ajax-functions/db.deleteHost.php',
+		  type: 'POST',
+		  dataType: 'json',
+		  data: {
+		  	'item_id': itemID
+		  },
+		  context: this,
+		  success: function(data, textStatus, xhr) {
+		    $(this).parents('.active-hosts-row').fadeOut(500, function() {$(this).remove()});
+		  },
+		  error: function(xhr, textStatus, errorThrown) {
+		    console.log('error');
+		    console.log($(this));
+		    console.log('errorThrown');
+		    console.log('textStatus');
+		    console.log('xhr');
+
+		  }
+		});
+		return false;
+	});
 });

@@ -15,8 +15,8 @@
 		background:#dadada;
 	}
 		.active-hosts-header {
-			padding: 3px 8px;
-			font-size: 15px;
+			padding: 5px 8px;
+			font-size: 14px;
 		}
 	.active-hosts-row {
 		&:nth-of-type(2n+1){
@@ -24,8 +24,8 @@
 		}
 	}
 		.active-hosts-data-item {
-			padding: 3px 8px;
-			font-size:13px;
+			padding: 5px 8px;
+			font-size:12px;
 		}
 		.active-hosts-icons {
 			text-align: center;

@@ -4,7 +4,7 @@
 	$db = new Database();
 	$db->connect();
 	if(isset($_POST['submit'])){
-		$create = new createHost($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']);
+		$create = new CreateHost($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']);
 		if($create->validateInput() == 'false'){
 			$createUserOutput = $create->createUser();
 			$createFolderOutput = $create->createFolder();
@@ -36,7 +36,7 @@
 <section class="container">
 	<article class="module create-new col-lg-4 col-sm-12">
 		<header class="module-header">
-			<h1 class="h2">Create a New Virtual Host</h1>
+			<h1 class="h3">Create a New Virtual Host</h1>
 		</header>
 		<section class="module-content">
 			<form action="" method="POST" class="create-host">
@@ -64,7 +64,7 @@
 	</article>
 	<article class="module view-active col-lg-push-1 col-lg-7 col-sm-12">
 		<header class="module-header">
-			<h1 class="h2">View Active Virtual Hosts</h1>
+			<h1 class="h3">View Active Virtual Hosts</h1>
 		</header>
 		<section class="module-content">
 			<table class="active-hosts responsive">
@@ -88,7 +88,7 @@
 						echo '<td class="active-hosts-data-item">'.ucwords($res['folder_name']).'</td>';
 						echo '<td class="active-hosts-data-item">'.ucwords($res['client_type']).'</td>';
 						echo '<td class="active-hosts-data-item">'.ucwords($res['active']).'</td>';
-						echo '<td class="active-hosts-data-item active-hosts-icons"><a href="#'.$res["id"].'" class="edit-'.$res["id"].'"><i class="icon-cog"></i></a><a href="#'.$res["id"].'" class="trash-'.$res["id"].'"><i class="icon-trash"></i></a></td>';
+						echo '<td class="active-hosts-data-item active-hosts-icons"><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="edit-host"><i class="icon-cog"></i></a><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="trash-host"><i class="icon-trash"></i></a></td>';
 					echo '</tr>';
 					}?>
 				</tbody>
