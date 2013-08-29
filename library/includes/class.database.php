@@ -152,7 +152,7 @@ class Database
             $insert = 'INSERT INTO '.$table;
             if($rows != null)
             {
-                $insert .= ' ('.$rows.')';
+                $insert .= ' ('.$rows.')'; 
             }
 
             for($i = 0; $i < count($values); $i++)
@@ -162,19 +162,18 @@ class Database
             }
             $values = implode(',',$values);
             $insert .= ' VALUES ('.$values.')';
-
-            $ins = @mysql_query($insert);
-
+            $ins = @mysql_query($insert);            
             if($ins)
             {
-                return true;
+                return true; 
             }
             else
             {
-                return false;
+                return false; 
             }
         }
     }
+
 
     /*
     * Deletes table or records where condition is true

@@ -3,18 +3,18 @@
 	include_once('library/includes/class.createHost.php');
 	$db = new Database();
 	$db->connect();
-	$db->select('virtualHosts');
-	$dbResults = $db->getResult();
 	if(isset($_POST['submit'])){
 		$create = new createHost($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']);
 		if($create->validateInput() == 'false'){
-			$db->insert('virtualHosts', array($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']));
 			$createUserOutput = $create->createUser();
 			$createFolderOutput = $create->createFolder();
 			$enableSiteOut = $create->enableSite();
 			$restartApacheOut = $create->restartApache();
 		}
 	}
+	$db->select('virtualHosts');
+	$dbResults = $db->getResult();
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,7 +67,7 @@
 			<h1 class="h2">View Active Virtual Hosts</h1>
 		</header>
 		<section class="module-content">
-			<table class="active-hosts">
+			<table class="active-hosts responsive">
 				<tr class="active-hosts-headings">
 					<th class="active-hosts-header">Site Name</th>
 					<th class="active-hosts-header">Domain Name</th>
@@ -77,17 +77,7 @@
 					<th class="active-hosts-header">Active?</th>
 					<th class="active-hosts-header">Actions</th>
 				</tr>
-				<?php foreach($dbResults as $res){
-				echo '<tr class="active-hosts-row">';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['site_name']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['domain_name']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['user_name']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['folder_name']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['client_type']).'</td>';
-					echo '<td class="active-hosts-data-item">'.ucwords($res['active']).'</td>';
-					echo '<td class="active-hosts-data-item"><i class=".icon-cog"></i></td>';
-				echo '</tr>';
-				}?>
+				<?php include('library/includes/inc.activeHosts.php'); ?>
 
 			</table>
 		</section>
@@ -97,7 +87,7 @@
 			<h1 class="h2">Test Output</h1>
 		</header>
 		<section class="module-content">
-			<p><?php echo $errorMessage;?></p>
+			<p><?php echo $insertResult;?></p>
 			<p><?php echo $createUserOutput;?></p>
 			<p><?php echo $createFolderOutput;?></p>
 			<p><?php echo $enableSiteOut;?></p>
