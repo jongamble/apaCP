@@ -21,7 +21,8 @@ jQuery(document).ready(function($) {
 			output += '<td class="active-hosts-data-item">' + data['folder_name'] + '</td>';
 			output += '<td class="active-hosts-data-item">' + data['client_type'] + '</td>';
 			output += '<td class="active-hosts-data-item">' + data['active'] + '</td>';
-			output += '<td class="active-hosts-data-item active-hosts-icons"><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="edit-host"><i class="icon-cog"></i></a><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="trash-host"><i class="icon-trash"></i></a></td>';
+			//output += '<td class="active-hosts-data-item active-hosts-icons"><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="edit-host"><i class="icon-cog"></i></a><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="trash-host"><i class="icon-trash"></i></a></td>';
+			output += '<td class="active-hosts-data-item active-hosts-icons"><a href="#' + data["id"] + '" data-item-id="' + data["id"] + '" class="trash-host"><i class="icon-trash"></i></a></td>';
 			output += '</tr>';
 			return output;
 		}
@@ -59,6 +60,7 @@ jQuery(document).ready(function($) {
 					console.log(data);
 					$(writeRow(data)).hide().prependTo('.active-hosts-list').fadeIn(800);
 					$('.create-error').hide();
+					$('.create-incomplete').hide();
 					$('.create-success').fadeIn(800);
 
 				},
@@ -66,6 +68,7 @@ jQuery(document).ready(function($) {
 					console.log('Error');
 					console.log(data);
 					$('.create-success').hide();
+					$('.create-incomplete').hide();					
 					$('.create-error').fadeIn(800);
 				}
 			});
@@ -73,7 +76,8 @@ jQuery(document).ready(function($) {
 			//$('.error_message').animate({opacity:1});
 			console.log('Error with input to ajax');
 			$('.create-success').hide();
-			$('.create-error').fadeIn(800);
+			$('.create-error').hide();
+			$('.create-incomplete').fadeIn(800);
 		}	
 	    return false;
 	});

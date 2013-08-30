@@ -73,3 +73,6 @@
 	}
 }
 
+.create-incomplete {
+	@extend .create-error;
+}

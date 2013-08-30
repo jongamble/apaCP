@@ -44,7 +44,11 @@
 		</section>
 		<section class="create-error">
 			<i class="icon-remove-sign"></i>
-			<p>We ran into an error creating this virtual host. Please try again later.</p>
+			<p>We ran into an error creating this virtual host. Please try again.</p>
+		</section>
+		<section class="create-incomplete">
+			<i class="icon-remove-sign"></i>
+			<p>Looks like a few fields weren't filled out properly. Correct the errors below and try again.</p>
 		</section>
 		<section class="module-content">
 			<form action="" method="POST" class="create-host">
@@ -96,7 +100,8 @@
 						echo '<td class="active-hosts-data-item">'.ucwords($res['folder_name']).'</td>';
 						echo '<td class="active-hosts-data-item">'.ucwords($res['client_type']).'</td>';
 						echo '<td class="active-hosts-data-item">'.ucwords($res['active']).'</td>';
-						echo '<td class="active-hosts-data-item active-hosts-icons"><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="edit-host"><i class="icon-cog"></i></a><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="trash-host"><i class="icon-trash"></i></a></td>';
+						//echo '<td class="active-hosts-data-item active-hosts-icons"><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="edit-host"><i class="icon-cog"></i></a><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="trash-host"><i class="icon-trash"></i></a></td>';
+						echo '<td class="active-hosts-data-item active-hosts-icons"><a href="#'.$res["id"].'" data-item-id="'.$res["id"].'" class="trash-host"><i class="icon-trash"></i></a></td>';
 					echo '</tr>';
 					}?>
 				</tbody>
