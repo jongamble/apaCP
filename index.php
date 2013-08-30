@@ -38,6 +38,14 @@
 		<header class="module-header">
 			<h1 class="h3">Create a New Virtual Host</h1>
 		</header>
+		<section class="create-success">
+			<i class="icon-ok-sign"></i>
+			<p>This site was successfully created.</p>
+		</section>
+		<section class="create-error">
+			<i class="icon-remove-sign"></i>
+			<p>We ran into an error creating this virtual host. Please try again later.</p>
+		</section>
 		<section class="module-content">
 			<form action="" method="POST" class="create-host">
 				<label for="site-name" class="input-label">Site Name</label>

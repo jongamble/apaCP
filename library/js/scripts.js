@@ -58,16 +58,22 @@ jQuery(document).ready(function($) {
 					//$('tbody').prepend()
 					console.log(data);
 					$(writeRow(data)).hide().prependTo('.active-hosts-list').fadeIn(800);
+					$('.create-error').hide();
+					$('.create-success').fadeIn(800);
 
 				},
 				error: function(data){
 					console.log('Error');
 					console.log(data);
+					$('.create-success').hide();
+					$('.create-error').fadeIn(800);
 				}
 			});
 		} else {
 			//$('.error_message').animate({opacity:1});
 			console.log('Error with input to ajax');
+			$('.create-success').hide();
+			$('.create-error').fadeIn(800);
 		}	
 	    return false;
 	});

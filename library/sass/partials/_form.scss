@@ -20,3 +20,56 @@
 .form-error {
 	@include box-shadow(rgba(red, .5) 0 0 10px 2px inset)
 }
+
+.create-success {
+	background:#C7FCD5;
+	@include border-radius(15px);
+	border: 1px solid #056B20;
+	color:#056B20;
+	padding:20px 25px;
+	margin:10px 15px;
+	@include clearfix;
+	position:relative;
+
+	display:none;
+
+	i {
+		width:5%;
+		position:absolute;
+		top:40%;
+		left:5%;
+	}
+	p {
+		display:inline;
+		width:93%;
+		float:right;
+		margin:0;
+	}
+}
+
+.create-error {
+	background:#FCB6B6;
+	@include border-radius(15px);
+	border: 1px solid #821717;
+	color:#821717;
+	padding:20px 25px;
+	margin:10px 15px;
+	@include clearfix;
+	position:relative;
+
+	display:none;
+
+	i {
+		width:5%;
+		position:absolute;
+		top:40%;
+		left:5%;
+	}
+	p {
+		display:inline;
+		width:93%;
+		float:right;
+		margin:0;
+	}
+}
+
