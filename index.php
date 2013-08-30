@@ -3,15 +3,7 @@
 	include_once('library/includes/class.createHost.php');
 	$db = new Database();
 	$db->connect();
-	if(isset($_POST['submit'])){
-		$create = new CreateHost($_POST['site-name'],$_POST['domain-name'],$_POST['user-name'],$_POST['user-pass'],$_POST['folder-name'],$_POST['client-type']);
-		if($create->validateInput() == 'false'){
-			$createUserOutput = $create->createUser();
-			$createFolderOutput = $create->createFolder();
-			$enableSiteOut = $create->enableSite();
-			$restartApacheOut = $create->restartApache();
-		}
-	}
+
 	$db->select('virtualHosts');
 	$dbResults = $db->getResult();
 	
@@ -40,15 +32,15 @@
 		</header>
 		<section class="create-success">
 			<i class="icon-ok-sign"></i>
-			<p>This site was successfully created.</p>
+			<p>This site was successfully created. <?=$results?></p>
 		</section>
 		<section class="create-error">
 			<i class="icon-remove-sign"></i>
-			<p>We ran into an error creating this virtual host. Please try again.</p>
+			<p>We ran into an error creating this virtual host. Please try again. <?=$results?></p>
 		</section>
 		<section class="create-incomplete">
-			<i class="icon-remove-sign"></i>
-			<p>Looks like a few fields weren't filled out properly. Correct the errors below and try again.</p>
+			<i class="icon-ex-sign"></i>
+			<p>Looks like a few fields weren't filled out properly. Correct the errors below and try again. <?=$results?></p>
 		</section>
 		<section class="module-content">
 			<form action="" method="POST" class="create-host">
